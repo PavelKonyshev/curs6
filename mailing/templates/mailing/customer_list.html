@@ -1,0 +1,27 @@
+{% extends 'mailing/basic_template.html' %}
+{% load my_tags %}
+{% block content %}
+<div class="row text-center">
+    {% for customer in object_list %}
+    <div class="col-3">
+        <div class="card mb-4 box-shadow">
+            <div class="card-header">
+                <h4 class="my-0 font-weight-normal">{{ customer.contact_email }}</h4>
+            </div>
+            <div class="card-body">
+                <ul class="list-unstyled mt-3 mb-4 text-start m-3">
+                    <li>{{ customer.last_name }}</li>
+                    <li>{{ customer.creator }}</li>
+                </ul>
+                {% if user == customer.creator %}
+                <a class="p-2 btn btn-outline-primary" href="/info_customer/{{ customer.id }}/">Посмотреть</a>
+                <a class="p-2 btn btn-outline-primary" href="/edit_customer/{{ customer.id }}/">Редактировать</a>
+                <a class="p-2 btn btn-outline-primary" href="/delete_customer/{{ customer.id }}/">Удалить</a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+ <a class="p-2 btn btn-outline-primary" href="/create_customer/">Создать нового клиента сервиса</a>
+{% endblock %}

@@ -1,0 +1,38 @@
+{% extends 'mailing/basic_template.html' %}
+{% load my_tags %}
+{% block content %}
+<div class="row text-center">
+    {% for mailing in object_list %}
+    <div class="col-3">
+        <div class="card mb-4 box-shadow">
+            <div class="card-header">
+                <h4 class="my-0 font-weight-normal">{{ mailing.name }}</h4>
+            </div>
+            <div class="card-body">
+                <ul class="list-unstyled mt-3 mb-4 text-start m-3">
+                    <li>{{ mailing.date_and_time_of_first_mailing }}</li>
+                    <li>{{ mailing.frequency }}</li>
+                    <li>{{ mailing.mailing_status }}</li>
+                    <li>{{ mailing.message }}</li>
+                    <li>{{ mailing.customers_of_service }}</li>
+                    <li>{{ mailing.creator }}</li>
+                </ul>
+                {% if perms.mailing.can_view_any_mailing %}
+                <a class="p-2 btn btn-outline-primary" href="/info_mailing/{{ mailing.id }}/">Посмотреть</a>
+                {% endif %}
+                {% if perms.mailing.can_disable_mailing or user == mailing.creator %}
+                <a class="p-2 btn btn-outline-primary" href="/edit_mailing/{{ mailing.id }}/">Редактировать</a>
+                {% endif %}
+                {% if not perms.mailing.can_disable_mailing %}
+                <a class="p-2 btn btn-outline-primary" href="/delete_mailing/{{ mailing.id }}/">Удалить</a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% if not perms.mailing.can_disable_mailing %}
+ <a class="p-2 btn btn-outline-primary" href="/create_mailing/">Создать новую рассылку</a>
+{% endif %}
+
+{% endblock %}

@@ -1,0 +1,29 @@
+{% extends 'mailing/basic_template.html' %}
+{% load my_tags %}
+{% block content %}
+<div class="row text-center">
+    {% for message in object_list %}
+    <div class="col-3">
+        <div class="card mb-4 box-shadow">
+            <div class="card-header">
+                <h4 class="my-0 font-weight-normal">{{ message.subject_of_letter }}</h4>
+            </div>
+            <div class="card-body">
+                <ul class="list-unstyled mt-3 mb-4 text-start m-3">
+                    <li>{{ message.body_of_letter }}</li>
+                    <li>{{ message.creator }}</li>
+                </ul>
+                {% if user == message.creator %}
+                <a class="p-2 btn btn-outline-primary" href="/info_message/{{ message.id }}/">Посмотреть</a>
+                <a class="p-2 btn btn-outline-primary" href="/edit_message/{{ message.id }}/">Редактировать</a>
+                <a class="p-2 btn btn-outline-primary" href="/delete_message/{{ message.id }}/">Удалить</a>
+                {% endif %}
+
+
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+ <a class="p-2 btn btn-outline-primary" href="/create_message/">Создать новое сообщение для рассылки</a>
+{% endblock %}

@@ -1,0 +1,24 @@
+{% extends 'mailing/basic_template.html' %}
+{% load my_tags %}
+{% block content %}
+<form method="post">
+    <div class="row text-center">
+        <div class="col-6">
+            <div class="card mb-4 box-shadow">
+                <div class="card-body">
+                    {% csrf_token %}
+                    <div class="card-header">
+                        <h4 class="my-0 font-weight-normal">Ты действительно хочешь удалить профиль?</h4>
+                    </div>
+                    <div class="card-body">
+                        <ul class="list-unstyled mt-3 mb-4 text-start m-3">
+                            <li>Профиль {{ object.email }} будет удалён</li>
+                        </ul>
+                        <button type="submit" class="btn btn-success">Удалить</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+{% endblock %}

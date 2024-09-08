@@ -1,0 +1,16 @@
+{% extends 'mailing/basic_template.html' %}
+{% load my_tags %}
+{% block content %}
+<div class="row text-center">
+    <div class="col-3">
+        <div class="card mb-4 box-shadow">
+            <div class="card-body">
+                <ul class="list-unstyled mt-3 mb-4 text-start m-3">
+                    <li>{{ object.date_and_time_of_last_mailing_attempt }}</li>
+                    <li>{{ object.mailing }}</li>
+                    <li>{{ object.attempt_status }}</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+{% endblock %}

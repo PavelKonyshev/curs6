@@ -1,0 +1,25 @@
+{% extends 'mailing/basic_template.html' %}
+{% load my_tags %}
+{% block content %}
+<div class="row text-center">
+    <div class="col-3">
+        <div class="card mb-4 box-shadow">
+            <form method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="card-header">
+                    <h4 class="my-0 font-weight-normal">{{ object.name }}</h4>
+                </div>
+                <div class="card-body">
+                    <ul class="list-unstyled mt-3 mb-4 text-start m-3">
+                        <li>{{ object.date_and_time_of_first_mailing }}</li>
+                        <li>{{ object.frequency }}</li>
+                        <li>{{ object.mailing_status }}</li>
+                        <li>{{ object.message }}</li>
+                        <li>{{ mailing.customers_of_service }}</li>
+                    </ul>
+                    <button type="submit" class="btn btn-success">Удалить</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    {% endblock %}

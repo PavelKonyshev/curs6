@@ -1,0 +1,20 @@
+{% extends 'mailing/basic_template.html' %}
+{% load my_tags %}
+{% block content %}
+<div class="row text-center">
+    {% for attempt in object_list %}
+    <div class="col-3">
+        <div class="card mb-4 box-shadow">
+            <div class="card-body">
+                <ul class="list-unstyled mt-3 mb-4 text-start m-3">
+                    <li>{{ attempt.date_and_time_of_last_mailing_attempt }}</li>
+                    <li>{{ attempt.mailing }}</li>
+                    <li>{{ attempt.attempt_status }}</li>
+                </ul>
+                <a class="p-2 btn btn-outline-primary" href="/info_attempt/{{ attempt.id }}/">Посмотреть</a>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}
